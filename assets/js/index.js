@@ -238,5 +238,10 @@ $noteList.on("click", ".delete-note", handleNoteDelete);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
 
+app.listen(PORT, function() {
+  console.log("App listening on PORT " + PORT);
+});
+
+
 // Gets and renders the initial list of notes
 getAndRenderNotes();
