@@ -66,26 +66,26 @@ app.get("/", function(req, res) {
   
   app.delete("/api/notes/:id", function(req, res) {
     try { 
-      storedNotes = fs.readFileSync("db/db.json", "utf8"); 
+      storedNotes = fs.readFileSync("./db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
   
       //filters through the notes and returns all notes that don't have the same 
       // id as the specNote we are trying to remove 
-      storedNotes = storedNotes.filter(function(specNote){ 
+      let tempNotes = storedNotes.filter(function(specNote){ 
         return specNote.id != req.params.id; 
       }); 
-  
-      storedNotes = JSON.stringify(storedNotes); 
-      fs.writeFile("db/db.json", storedNotes, "utf8", function(err){ 
+      storedNotes = JSON.stringify(tempNotes); 
+      fs.writeFile("./db/db.json", storedNotes, "utf8", function(err){ 
         if (err){ 
           throw err;
         }
       }); 
   
-      res.send(JSON,parse(storedNotes)); 
+      res.send(JSON.parse(storedNotes)); 
     
     } catch (err) { 
-      console.log("error writing to the API"); 
+      throw err; 
+      console.log("error deleting note and writing to the API"); 
     }
   
   }); 
