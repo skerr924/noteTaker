@@ -37,7 +37,7 @@ app.get("/", function(req, res) {
   app.get('/api/notes', function(req, res) {
   
     try { 
-    const storedNotes = fs.readFileSync("db/db.json", "utf8"); 
+    const storedNotes = fs.readFileSync("/db/db.json", "utf8"); 
     storedNotes = JSON.parse(storedNotes); 
     } catch (err) { 
       console.log ("error getting api stored notes"); 
@@ -49,14 +49,14 @@ app.get("/", function(req, res) {
   
   app.post("/api/notes", function(req, res) {
     try { 
-      const storedNotes = fs.readFileSync("db/db.json", "utf8"); 
+      const storedNotes = fs.readFileSync("/db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
       req.body.id = storedNotes.length; 
       storedNotes.push(req.body)
       storedNotes = JSON.stringify(storedNotes); 
   
       try {
-      fs.writeFile("db/db.json", storedNotes, "utf8")
+      fs.writeFile("/db/db.json", storedNotes, "utf8")
       } 
       catch (err) { 
         console.log ("error writing to api"); 
@@ -70,7 +70,7 @@ app.get("/", function(req, res) {
   
   app.delete("/api/notes/:id", function(req, res) {
     try { 
-      const storedNotes = fs.readFileSync("db/db.json", "utf8"); 
+      const storedNotes = fs.readFileSync("/db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
   
       //filters through the notes and returns all notes that don't have the same 
@@ -80,7 +80,7 @@ app.get("/", function(req, res) {
       }); 
   
       storedNotes = JSON.stringify(storedNotes); 
-      fs.writeFile("db/db.json", storedNotes, "utf8", function(err){ 
+      fs.writeFile("/db/db.json", storedNotes, "utf8", function(err){ 
         if (err){ 
           throw err;
         }
