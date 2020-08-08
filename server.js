@@ -35,7 +35,7 @@ app.get("/", function(req, res) {
   app.get('/api/notes', function(err, res) {
   
     try { 
-    storedNotes = fs.readFileSync("db/db.json", "utf8"); 
+    storedNotes = fs.readFileSync("./db/db.json", "utf8"); 
     storedNotes = JSON.parse(storedNotes); 
     } catch (err) { 
       console.log ("error getting api stored notes"); 
@@ -45,28 +45,26 @@ app.get("/", function(req, res) {
   
   });
   
-  app.post("/api/notes", function(err, res) {
+  app.post("/api/notes", function(req, res) {
     try { 
-      storedNotes = fs.readFileSync("db/db.json", "utf8"); 
+      storedNotes = fs.readFileSync("./db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
       req.body.id = storedNotes.length; 
       storedNotes.push(req.body)
       storedNotes = JSON.stringify(storedNotes); 
-  
-      try {
-      fs.writeFile("db/db.json", storedNotes, "utf8")
-      } 
-      catch (err) { 
-        console.log ("error writing to api"); 
-      }
+      fs.writeFile("./db/db.json", storedNotes, "utf8", function (err){ 
+        if (err) throw err; 
+      }); 
+
+      res.json(JSON.parse(storedNotes)); 
     
-      res.json(JSON.parse(storedNotes));
     }  catch (err) { 
+        throw err; 
         console.log ("error writing to the API"); 
     }
   });
   
-  app.delete("/api/notes/:id", function(err, res) {
+  app.delete("/api/notes/:id", function(req, res) {
     try { 
       storedNotes = fs.readFileSync("db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
