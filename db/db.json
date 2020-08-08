@@ -1,12 +1,1 @@
-[   
-    { 
-    "title":"Grocery",
-    "text":"Eggs and milk"
-    }, 
-    
-    {
-    "title":"To-do",
-    "text":"Laundry"
-    }
-
-]
+[{"title":"Grocery","text":"Eggs and milk"},{"title":"To-do","text":"Laundry"}]

@@ -1,8 +1,8 @@
 // Dependencies
 // ===========================================
-var express = require("express");
-var path = require("path");
-var fs = require("fs"); 
+var express = require('express');
+var path = require('path');
+var fs = require('fs'); 
 
 // Sets up the Express App
 // ===========================================
@@ -14,11 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 
-//storedNotes initializes an array for any storedNotes data moving back and
-//forth from the api to the browser 
+//storedNotes array moves data back and forth from api 
 let storedNotes = []; 
-
-
 
 // Routes
 // =============================================================
@@ -35,10 +32,10 @@ app.get("/", function(req, res) {
   });
   
   //gets all notes from the db.json file 
-  app.get('/api/notes', function(req, res) {
+  app.get('/api/notes', function(err, res) {
   
     try { 
-    const storedNotes = fs.readFileSync("/db/db.json", "utf8"); 
+    storedNotes = fs.readFileSync("db/db.json", "utf8"); 
     storedNotes = JSON.parse(storedNotes); 
     } catch (err) { 
       console.log ("error getting api stored notes"); 
@@ -48,16 +45,16 @@ app.get("/", function(req, res) {
   
   });
   
-  app.post("/api/notes", function(req, res) {
+  app.post("/api/notes", function(err, res) {
     try { 
-      const storedNotes = fs.readFileSync("/db/db.json", "utf8"); 
+      storedNotes = fs.readFileSync("db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
       req.body.id = storedNotes.length; 
       storedNotes.push(req.body)
       storedNotes = JSON.stringify(storedNotes); 
   
       try {
-      fs.writeFile("/db/db.json", storedNotes, "utf8")
+      fs.writeFile("db/db.json", storedNotes, "utf8")
       } 
       catch (err) { 
         console.log ("error writing to api"); 
@@ -69,9 +66,9 @@ app.get("/", function(req, res) {
     }
   });
   
-  app.delete("/api/notes/:id", function(req, res) {
+  app.delete("/api/notes/:id", function(err, res) {
     try { 
-      const storedNotes = fs.readFileSync("/db/db.json", "utf8"); 
+      storedNotes = fs.readFileSync("db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
   
       //filters through the notes and returns all notes that don't have the same 
@@ -81,7 +78,7 @@ app.get("/", function(req, res) {
       }); 
   
       storedNotes = JSON.stringify(storedNotes); 
-      fs.writeFile("/db/db.json", storedNotes, "utf8", function(err){ 
+      fs.writeFile("db/db.json", storedNotes, "utf8", function(err){ 
         if (err){ 
           throw err;
         }
