@@ -20,7 +20,6 @@ let storedNotes = [];
 // Routes
 // =============================================================
 
-
 //displays homepage 
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
@@ -49,7 +48,7 @@ app.get("/", function(req, res) {
     try { 
       storedNotes = fs.readFileSync("./db/db.json", "utf8"); 
       storedNotes = JSON.parse(storedNotes); 
-      req.body.id = storedNotes.length; 
+      req.body.id = Math.floor(Math.random() * Math.floor(1000000)); 
       storedNotes.push(req.body)
       storedNotes = JSON.stringify(storedNotes); 
       fs.writeFile("./db/db.json", storedNotes, "utf8", function (err){ 

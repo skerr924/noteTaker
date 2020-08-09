@@ -8,14 +8,14 @@ const $noteList = $(".list-container .list-group");
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
-let noteID = 100; 
 
 // A function for getting all notes from the db
-const getNotes = () => {
+const getNotes = () => {  
   return $.ajax({
     url: "/api/notes",
     method: "GET",
   });
+
 };
 
 // A function for saving a note to the db
@@ -54,11 +54,11 @@ const renderActiveNote = () => {
 
 // Get the note data from the inputs, save it to the db and update the view
 const handleNoteSave = function () {
-  noteID++; 
+  // let noteID = Math.floor(Math.random() * Math.floor(1000000));
+
   const newNote = {
     title: $noteTitle.val(),
     text: $noteText.val(),
-    id: noteID
   };
 
   saveNote(newNote).then(() => {
