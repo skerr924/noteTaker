@@ -2,7 +2,8 @@
 
 <a name="desc"></a>
 # Description 
-This is a simple note taking application designed to allow users to easily write down and save important notes, and delete when necessary. 
+This is a simple note taking application designed to allow users to easily write down and save important notes, and delete when necessary. This application uses express to interact with a local database and is deployed on Heroku, and can be found at: https://glacial-reaches-50755.herokuapp.com/
+
 
 # Table of Contents 
 1. [Description](#desc)
