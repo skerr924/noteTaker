@@ -10,9 +10,9 @@ This is a simple note taking application designed to allow users to easily write
 2. [Installation](#install)
 3. [Usage](#usage)
 4. [License](#lic)
-6. [Testing](#test)
-7. [Contributing](#contr)
-8. [Questions](#quest)
+5. [Testing](#test)
+6. [Contributing](#contr)
+7. [Questions](#quest)
 
 <a name="install"></a>
 # Installation 
@@ -29,7 +29,7 @@ This applicaiton is designed to be simple and user-friendly.
 No additional licenses are needed for this application. 
 
 <a name="test"></a>
-# License 
+# Testing
  There is currently no testing set up for this application. 
 
 <a name="contr"></a>
